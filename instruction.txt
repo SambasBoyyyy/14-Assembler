@@ -1,0 +1,5 @@
+Add $t0, $s1, 5
+Sll $t0, $s1, 15
+Addi $t1, $s2, 7
+Srl $t0, $s1, 6
+Slti $t0, $s1, 5

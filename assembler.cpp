@@ -70,12 +70,11 @@ char hexDecNum[20];
 string coMMA(string ch){
   for (int i = 0; i < ch.length(); i++)
     {
-      //cout<<ch.length();
+  
        if (ch[i] == ',' || ch[i] == ' ')
        {
          ch.erase(i);
-        //  cout<<ch.length();
-        //  cout<<"ggg";
+ 
        }
        
     }
@@ -139,10 +138,13 @@ map<string,string> instrution_map {
 
 
 
-//ofstream machine_file;
+
+
+
+
 ifstream instruction_file;
 
-//machine_file.open("instruction.txt");
+
 
 string instruction;
 
@@ -160,7 +162,7 @@ string h="";
       int stringCounter=0;
       
     string machine_code;
-    string hex_code;
+   
        for (int  i = 0; i < instruction.length(); i++)
        {       
               stringCounter++;
@@ -171,30 +173,54 @@ string h="";
                 substring = coMMA(substring);
                 startpos=i+1;
                 stringCounter=0;
-                
-               // cout<<substring<<" ";
-                
+            
+               if(instrution_map[substring].length() == 4 || instrution_map[substring].length() == 3 ){
+
                 machine_code=  machine_code+instrution_map[substring];
-                hex_code=  hex_code+binToHex(instrution_map[substring]);
-                machine_code.append(" ");
+            ;
+               }
+               else if (instrution_map[substring].length() !=4 && (substring == "Sll" || substring == "Srl"))
+               {
+                 machine_code=  machine_code+instrution_map[substring]+"1";
+               }
+               else{
+                 machine_code=  machine_code+instrution_map[substring]+"0";
+               }
+               
+                
+                
+               
              }
              if (i == instruction.length()-1) {
               
                  substring = instruction.substr(startpos, stringCounter);
                    substring = coMMA(substring);
                 
-                // cout<<substring<<"\n";
-                 machine_code=  machine_code+instrution_map[substring];
-                 hex_code=  hex_code+binToHex(instrution_map[substring]);
+                
+                if(instrution_map[substring].length() == 4 ){
+
+                machine_code=  machine_code+instrution_map[substring];
+               
+               }
+               else if (instrution_map[substring].length() !=4 && (substring == "Sll" || substring == "Srl"))
+               {
+                 machine_code=  machine_code+instrution_map[substring]+"1";
+               }
+               else{
+                 machine_code=  machine_code+instrution_map[substring]+"0";
+               }
+               
+                
              }
 
              
        }
 
-
-    
+         
+         
+       machine_code=  "00"+machine_code;
        c= c+ machine_code+"\n";
-       h= h+ hex_code+"\n";
+     
    
 
        
@@ -209,7 +235,47 @@ string h="";
     }  
 
     cout<<c;
+
+    vector<char> l;
+   
+
+    for (int i = 0; i < c.length(); i++)
+    {
+      if(c[i] != '\n'){
+        l.push_back(c[i]);
+      }
+    }
+    
+int manager = 0;
+    for (int i = 0; i < l.size(); i=i+4)
+    {
+      string tem;
+
+      for (int j = 0; j < 4; j++)
+      {
+        tem.push_back(l[i+j]);
+      }
+      if (manager == 3)
+      {
+          h= h+ binToHex(tem)+'\n';
+          manager =0;
+      }
+       else{ 
+        
+        h= h+ binToHex(tem);
+         manager++;
+
+       }
+        
+ 
+      
+    }
+
+
     cout<<h;
+    
+    
+ 
 
     ofstream output;
 
@@ -226,34 +292,6 @@ string h="";
 
 
     
-    
-
-
-
-
-// fstream machine_file;
-
-//  for (int i = 0; i < v.size(); i++) {
-//         cout << v[i]<<endl;
-//       machine_file.open("machine.txt");
-
-//     if(machine_file.is_open())
-//     {
-//        string s = v[i];
-//             for (int j = 0; j < s.length()-1; i++)
-//             {
-//               machine_file<<s[i];
-//             }
-            
-       
-//         machine_file.close();
-//     }
-//     else cout<<"Unable to open file";
-//     }
-
-
-
-
 
     return 0;
 }

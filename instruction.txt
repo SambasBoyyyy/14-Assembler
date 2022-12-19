@@ -1,5 +1,1 @@
-Add $t0, $s1, $s2
-Sll $t0, $s1, 1
-Addi $t1, $s2, 7
-Srl $t0, $s1, 1
-Slti $t0, $s1, 5
+J 15

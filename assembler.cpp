@@ -97,7 +97,7 @@ map<string,string> instrution_map {
 {"Or","0100"},
 {"Sll","0111"},
 {"Srl","1000"},
-{"Jump","1001"},
+{"J","1001"},
 {"Beq","1010"},
 {"Bne","1011"},
 {"Slt","1100"},
@@ -177,8 +177,14 @@ string h="";
                if(instrution_map[substring].length() == 4 || instrution_map[substring].length() == 3 ){
 
                 machine_code=  machine_code+instrution_map[substring];
+
+                if (substring == "J")
+               {
+                 machine_code=  machine_code+"0000";
+               }
             ;
                }
+               
                else if (instrution_map[substring].length() !=4 && (substring == "Sll" || substring == "Srl"))
                {
                  machine_code=  machine_code+instrution_map[substring]+"1";
@@ -202,6 +208,7 @@ string h="";
                 machine_code=  machine_code+instrution_map[substring];
                
                }
+                
                else if (instrution_map[substring].length() !=4 && (substring == "Sll" || substring == "Srl"))
                {
                  machine_code=  machine_code+instrution_map[substring]+"1";

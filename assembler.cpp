@@ -178,7 +178,7 @@ string h="";
 
                 machine_code=  machine_code+instrution_map[substring];
 
-                cout<<substring<<machine_code<<endl;
+               
 
                 if (substring == "J")
                {

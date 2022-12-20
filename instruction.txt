@@ -1,1 +1,7 @@
-J 15
+Add $s3, $zero, $zero
+Add $s1, $s3, $s3
+Slti $t0, $s3, 3
+Beq $t0, $zero, 10
+Add $s1, $s3, $s0
+Addi $s3, $s0, 2
+J 3

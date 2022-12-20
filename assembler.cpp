@@ -109,7 +109,7 @@ map<string,string> instrution_map {
 {"$t0","001"},
 {"$t1","010"},
 {"$t2","011"},
-{"$s0","`100"},
+{"$s0","100"},
 {"$s1","101"},
 {"$s2","110"},
 {"$s3","111"},
@@ -178,9 +178,11 @@ string h="";
 
                 machine_code=  machine_code+instrution_map[substring];
 
+                cout<<substring<<machine_code<<endl;
+
                 if (substring == "J")
                {
-                 machine_code=  machine_code+"0000";
+                 machine_code=  machine_code+"000000";
                }
             ;
                }
